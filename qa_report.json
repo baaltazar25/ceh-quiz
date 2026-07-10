@@ -1,0 +1,19 @@
+{
+  "sourcePdf": "Certified_Ethical_Hacker_312-50v13_Real_Questions.pdf",
+  "totalQuestionMarkers": 965,
+  "parsedQuestions": 965,
+  "firstQuestionId": 1,
+  "lastQuestionId": 965,
+  "correctAnswerMarkers": 302,
+  "suggestedAnswerMarkers": 663,
+  "imageQuestionCount": 6,
+  "imageQuestionIds": [
+    2,
+    38,
+    44,
+    76,
+    257,
+    280
+  ],
+  "validationWarnings": []
+}

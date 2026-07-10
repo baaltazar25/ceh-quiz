@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#07111f">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="CEH Quiz">
+  <title>CEH Quiz Offline</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="app" class="app-shell">
+    <header class="topbar">
+      <button id="homeBtn" class="icon-btn hidden" type="button" aria-label="Home">←</button>
+      <div>
+        <div class="eyebrow">OFFLINE QUESTION BANK</div>
+        <h1>CEH Quiz</h1>
+      </div>
+      <button id="installBtn" class="icon-btn" type="button" aria-label="Install">＋</button>
+    </header>
+
+    <main>
+      <section id="loadingView" class="panel">
+        <div class="spinner"></div>
+        <p>Loading question bank…</p>
+      </section>
+
+      <section id="homeView" class="hidden">
+        <div class="hero panel">
+          <div>
+            <span class="status-dot"></span>
+            <span id="bankStatus">Question bank ready</span>
+          </div>
+          <div class="hero-number" id="totalQuestions">0</div>
+          <div class="muted">questions available offline</div>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card"><span>Answered</span><strong id="answeredStat">0</strong></div>
+          <div class="stat-card"><span>Correct</span><strong id="correctStat">0</strong></div>
+          <div class="stat-card"><span>Wrong queue</span><strong id="wrongStat">0</strong></div>
+          <div class="stat-card"><span>Bookmarks</span><strong id="bookmarkStat">0</strong></div>
+        </div>
+
+        <div class="mode-grid">
+          <button class="mode-card primary" data-mode="training" type="button">
+            <span class="mode-kicker">TRAINING</span>
+            <strong>Practice all questions</strong>
+            <small>Instant validation after each answer</small>
+          </button>
+
+          <button class="mode-card" data-mode="exam" type="button">
+            <span class="mode-kicker">EXAM</span>
+            <strong>Random mock exam</strong>
+            <small>Answers are hidden until the end</small>
+          </button>
+
+          <button class="mode-card" data-mode="wrong" type="button">
+            <span class="mode-kicker">RETRY</span>
+            <strong>Wrong answers only</strong>
+            <small>Work through your current error queue</small>
+          </button>
+
+          <button class="mode-card" data-mode="bookmarks" type="button">
+            <span class="mode-kicker">SAVED</span>
+            <strong>Bookmarked questions</strong>
+            <small>Review manually selected questions</small>
+          </button>
+        </div>
+
+        <details class="panel settings-panel">
+          <summary>Exam settings</summary>
+          <div class="settings-grid">
+            <label>
+              <span>Questions</span>
+              <input id="examCount" type="number" inputmode="numeric" min="1" max="965" value="125">
+            </label>
+            <label>
+              <span>Timer, minutes</span>
+              <input id="examMinutes" type="number" inputmode="numeric" min="0" max="1440" value="240">
+            </label>
+            <label class="toggle-row">
+              <span>Shuffle answer options</span>
+              <input id="shuffleAnswers" type="checkbox" checked>
+            </label>
+            <label class="toggle-row">
+              <span>Shuffle training questions</span>
+              <input id="shuffleTraining" type="checkbox">
+            </label>
+          </div>
+        </details>
+
+        <details class="panel settings-panel">
+          <summary>Progress backup</summary>
+          <div class="backup-actions">
+            <button id="exportProgressBtn" class="secondary-btn" type="button">Export progress JSON</button>
+            <label class="secondary-btn file-label">
+              Import progress JSON
+              <input id="importProgressInput" type="file" accept="application/json,.json">
+            </label>
+            <button id="resetProgressBtn" class="danger-btn" type="button">Reset progress</button>
+          </div>
+        </details>
+
+        <div id="iosInstallHint" class="panel install-hint hidden">
+          <strong>Install on iPhone</strong>
+          <p>Open in Safari → Share → Add to Home Screen. After the first successful load, the question bank and images are cached for offline use.</p>
+        </div>
+      </section>
+
+      <section id="quizView" class="hidden">
+        <div class="quiz-meta">
+          <div>
+            <span id="modeBadge" class="badge">TRAINING</span>
+            <span id="questionMeta" class="muted"></span>
+          </div>
+          <button id="bookmarkBtn" class="bookmark-btn" type="button" aria-label="Bookmark">☆</button>
+        </div>
+
+        <div class="progress-track"><div id="progressBar" class="progress-fill"></div></div>
+
+        <div id="timerBox" class="timer hidden">00:00</div>
+
+        <article class="panel question-card">
+          <h2 id="questionText"></h2>
+          <img id="questionImage" class="question-image hidden" alt="Question illustration">
+          <div id="answersList" class="answers-list"></div>
+          <div id="feedbackBox" class="feedback hidden"></div>
+        </article>
+
+        <div class="quiz-actions">
+          <button id="nextBtn" class="primary-btn hidden" type="button">Next question</button>
+          <button id="finishExamBtn" class="secondary-btn hidden" type="button">Finish exam</button>
+        </div>
+      </section>
+
+      <section id="resultView" class="hidden">
+        <div class="panel result-card">
+          <span class="mode-kicker">SESSION COMPLETE</span>
+          <div id="resultScore" class="result-score">0%</div>
+          <div id="resultSummary" class="result-summary"></div>
+          <div class="result-actions">
+            <button id="reviewWrongBtn" class="primary-btn" type="button">Review wrong answers</button>
+            <button id="resultHomeBtn" class="secondary-btn" type="button">Back to home</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      Local-only progress · No backend · No analytics
+    </footer>
+  </div>
+
+  <dialog id="installDialog">
+    <form method="dialog" class="dialog-card">
+      <h3>Install CEH Quiz</h3>
+      <p id="installDialogText"></p>
+      <button class="primary-btn" value="close">OK</button>
+    </form>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
