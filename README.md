@@ -20,7 +20,7 @@ Image-backed questions:
 ## Features
 
 - Training mode with instant validation
-- Random exam mode
+- Random exam mode with instant validation after each answer
 - Wrong-answer retry queue
 - Bookmarks
 - Question and answer shuffling

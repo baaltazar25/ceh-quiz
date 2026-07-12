@@ -183,10 +183,7 @@
     el("feedbackBox").className = "feedback hidden";
     el("feedbackBox").replaceChildren();
     el("nextBtn").classList.add("hidden");
-    el("finishExamBtn").classList.toggle(
-      "hidden",
-      session.mode !== "exam" || session.index !== session.queue.length - 1
-    );
+    el("finishExamBtn").classList.add("hidden");
 
     renderAnswers(question);
   }
@@ -243,19 +240,22 @@
     session.currentSelection = answerKey;
     session.responses[question.id] = answerKey;
 
-    if (session.mode === "exam") {
-      renderAnswers(question);
-      if (session.index < session.queue.length - 1) {
-        el("nextBtn").classList.remove("hidden");
-      }
-      return;
+    session.revealed = true;
+    if (session.mode !== "exam") {
+      recordAttempt(question, answerKey);
     }
 
-    session.revealed = true;
-    recordAttempt(question, answerKey);
     renderAnswers(question);
     renderFeedback(question, answerKey);
-    el("nextBtn").classList.remove("hidden");
+
+    const isLastExamQuestion =
+      session.mode === "exam" && session.index === session.queue.length - 1;
+
+    if (isLastExamQuestion) {
+      el("finishExamBtn").classList.remove("hidden");
+    } else {
+      el("nextBtn").classList.remove("hidden");
+    }
   }
 
   function recordAttempt(question, answerKey) {
@@ -291,15 +291,18 @@
     box.className = `feedback ${correct ? "good" : "bad"}`;
 
     const title = document.createElement("strong");
-    title.textContent = correct
-      ? "✓ Correct"
-      : `✕ Wrong · correct answer: ${question.correctAnswer}`;
+    title.textContent = correct ? "✓ Correct" : "✕ Wrong";
+
+    const answer = document.createElement("div");
+    answer.className = "feedback-answer";
+    answer.textContent =
+      `Correct answer: ${question.correctAnswer} — ${question.answers[question.correctAnswer]}`;
 
     const detail = document.createElement("small");
     detail.textContent =
       `PDF answer marker: ${question.answerSource} Answer · source page ${question.sourcePage}`;
 
-    box.append(title, detail);
+    box.append(title, answer, detail);
   }
 
   function nextQuestion() {

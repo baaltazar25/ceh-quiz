@@ -411,6 +411,11 @@ input[type="number"] {
   border: 1px solid rgba(239, 68, 68, .35);
 }
 
+.feedback-answer {
+  margin-top: 8px;
+  font-weight: 700;
+}
+
 .feedback small {
   display: block;
   margin-top: 8px;
