@@ -1,4 +1,4 @@
-const CACHE_NAME = "ceh-quiz-v5";
+const CACHE_NAME = "ceh-quiz-v6";
 const ASSETS = [
   "./",
   "index.html",

@@ -89,4 +89,4 @@ The `image` property exists only for questions with an embedded image in the ori
 
 ## Answer explanations
 
-After every submitted answer, including correct answers, the app displays a detailed English explanation of why the marked answer is correct. Each explanation is structured as approximately five sentences: the correct choice, the decisive clue from the question, the underlying technical mechanism, comparison with the distractors, and the final conclusion.
+After every submitted answer, including correct answers, the app displays a concise English technical explanation. The text defines the relevant term or concept, explains the mechanism or decisive condition from the question, and—where useful—briefly distinguishes the incorrect options. Generic comparison phrases such as “this option fits better” are not used. A small number of technically inconsistent answer-key items are explicitly identified in their explanations instead of being justified with invented reasoning.
