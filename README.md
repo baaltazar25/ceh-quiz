@@ -19,11 +19,11 @@ Image-backed questions:
 
 ## Features
 
-- Training mode with instant validation
+- Training mode with instant validation and a fresh random question order for every session
 - Random exam mode with instant validation after each answer
 - Wrong-answer retry queue
 - Bookmarks
-- Question and answer shuffling
+- Automatic question shuffling in Practice all questions and configurable answer shuffling
 - Exam timer
 - Local-only progress in `localStorage`
 - Progress export/import as JSON
@@ -85,3 +85,7 @@ Each object in `questions.json` has the following shape:
 ```
 
 The `image` property exists only for questions with an embedded image in the original PDF.
+
+## Answer explanations
+
+After every submitted answer, including correct answers, the app displays a short English explanation of why the marked answer is correct.

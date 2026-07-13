@@ -26,7 +26,6 @@
       examCount: 125,
       examMinutes: 240,
       shuffleAnswers: true,
-      shuffleTraining: false,
     },
   };
 
@@ -77,7 +76,6 @@
     state.settings.examCount = clampNumber(el("examCount").value, 1, questions.length, 125);
     state.settings.examMinutes = clampNumber(el("examMinutes").value, 0, 1440, 240);
     state.settings.shuffleAnswers = el("shuffleAnswers").checked;
-    state.settings.shuffleTraining = el("shuffleTraining").checked;
     saveState();
   }
 
@@ -103,7 +101,6 @@
     el("examCount").value = Math.min(state.settings.examCount, questions.length);
     el("examMinutes").value = state.settings.examMinutes;
     el("shuffleAnswers").checked = state.settings.shuffleAnswers;
-    el("shuffleTraining").checked = state.settings.shuffleTraining;
   }
 
   function startMode(mode) {
@@ -111,8 +108,8 @@
 
     let queue = [];
     if (mode === "training") {
-      queue = questions.map((question) => question.id);
-      if (state.settings.shuffleTraining) queue = shuffle(queue);
+      // Generate a fresh random order for every practice session.
+      queue = shuffle(questions.map((question) => question.id));
     } else if (mode === "exam") {
       const count = Math.min(state.settings.examCount, questions.length);
       queue = shuffle(questions.map((question) => question.id)).slice(0, count);

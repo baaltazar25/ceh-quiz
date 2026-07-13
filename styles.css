@@ -416,6 +416,15 @@ input[type="number"] {
   font-weight: 700;
 }
 
+.feedback-explanation {
+  margin-top: 0.65rem;
+  line-height: 1.5;
+}
+
+.feedback-explanation strong {
+  font-weight: 700;
+}
+
 .feedback small {
   display: block;
   margin-top: 8px;
