@@ -298,11 +298,23 @@
     answer.textContent =
       `Correct answer: ${question.correctAnswer} — ${question.answers[question.correctAnswer]}`;
 
+    const explanation = document.createElement("div");
+    explanation.className = "feedback-explanation";
+
+    const explanationLabel = document.createElement("strong");
+    explanationLabel.textContent = "Why: ";
+
+    const explanationText = document.createElement("span");
+    explanationText.textContent =
+      question.explanation || "No explanation is available for this question.";
+
+    explanation.append(explanationLabel, explanationText);
+
     const detail = document.createElement("small");
     detail.textContent =
       `PDF answer marker: ${question.answerSource} Answer · source page ${question.sourcePage}`;
 
-    box.append(title, answer, detail);
+    box.append(title, answer, explanation, detail);
   }
 
   function nextQuestion() {
