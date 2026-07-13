@@ -80,7 +80,8 @@ Each object in `questions.json` has the following shape:
   "correctAnswer": "C",
   "answerSource": "Correct",
   "sourcePage": 317,
-  "image": "images/q257.png"
+  "image": "images/q257.png",
+  "explanation": "Detailed explanation of why option C is correct..."
 }
 ```
 
@@ -88,4 +89,4 @@ The `image` property exists only for questions with an embedded image in the ori
 
 ## Answer explanations
 
-After every submitted answer, including correct answers, the app displays a short English explanation of why the marked answer is correct.
+After every submitted answer, including correct answers, the app displays a detailed English explanation of why the marked answer is correct. Each explanation is structured as approximately five sentences: the correct choice, the decisive clue from the question, the underlying technical mechanism, comparison with the distractors, and the final conclusion.
