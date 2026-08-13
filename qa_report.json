@@ -1,11 +1,11 @@
 {
-  "sourcePdf": "Certified_Ethical_Hacker_312-50v13_Real_Questions.pdf",
-  "totalQuestionMarkers": 965,
-  "parsedQuestions": 965,
+  "sourcePdf": "EC-Council Certified Ethical Hacker (CEH v13) 312-50v13 Real Exam Questions.pdf",
+  "totalQuestionMarkers": 1049,
+  "parsedQuestions": 1049,
   "firstQuestionId": 1,
-  "lastQuestionId": 965,
-  "correctAnswerMarkers": 302,
-  "suggestedAnswerMarkers": 663,
+  "lastQuestionId": 1049,
+  "correctAnswerMarkers": 1049,
+  "suggestedAnswerMarkers": 0,
   "imageQuestionCount": 6,
   "imageQuestionIds": [
     2,
@@ -15,5 +15,13 @@
     257,
     280
   ],
-  "validationWarnings": []
+  "validationWarnings": [],
+  "explanationSource": "PDF-provided answer explanations",
+  "explanationLanguage": "English",
+  "explanationQuestionCount": 1049,
+  "explanationMinCharacters": 461,
+  "explanationMaxCharacters": 1341,
+  "explanationAverageCharacters": 792.71,
+  "sourcePageMin": 2,
+  "sourcePageMax": 752
 }

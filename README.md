@@ -2,20 +2,27 @@
 
 Question bank extracted from:
 
-`Certified_Ethical_Hacker_312-50v13_Real_Questions.pdf`
+`EC-Council Certified Ethical Hacker (CEH v13) 312-50v13 Real Exam Questions.pdf`
 
 ## Parsed dataset
 
-- Questions: **965**
-- IDs: **1–965**
-- `Correct Answer`: **302**
-- `Suggested Answer`: **663**
+- Questions: **1049**
+- IDs: **1–1049**
+- `Correct Answer`: **1049**
 - Questions with embedded PDF images: **6**
 - Parser validation warnings: **0**
 
 Image-backed questions:
 
 `2, 38, 44, 76, 257, 280`
+
+## What changed in this update
+
+- Rebuilt `questions.json` from the new 1049-question PDF.
+- Preserved the PDF's correct-answer key for every question.
+- Added the PDF-provided explanation of why the correct answer is correct and why each distractor is incorrect.
+- Re-extracted all six question images from the new PDF.
+- Bumped the Service Worker cache name so existing PWA installations refresh the question bank after redeployment.
 
 ## Features
 
@@ -48,8 +55,6 @@ Static hosting examples: GitHub Pages, Cloudflare Pages, Netlify, your own nginx
 
 ### Local desktop test
 
-From this directory:
-
 ```bash
 python3 -m http.server 8080
 ```
@@ -79,14 +84,10 @@ Each object in `questions.json` has the following shape:
   },
   "correctAnswer": "C",
   "answerSource": "Correct",
-  "sourcePage": 317,
+  "sourcePage": 183,
   "image": "images/q257.png",
-  "explanation": "Detailed explanation of why option C is correct..."
+  "explanation": "PDF-provided explanation of the correct answer, followed by why the other options are incorrect."
 }
 ```
 
-The `image` property exists only for questions with an embedded image in the original PDF.
-
-## Answer explanations
-
-After every submitted answer, including correct answers, the app displays a concise English technical explanation. The text defines the relevant term or concept, explains the mechanism or decisive condition from the question, and—where useful—briefly distinguishes the incorrect options. Generic comparison phrases such as “this option fits better” are not used. A small number of technically inconsistent answer-key items are explicitly identified in their explanations instead of being justified with invented reasoning.
+The `image` property exists only for questions with an embedded image in the source PDF. `sourcePage` is the 1-based PDF page on which the question begins.
